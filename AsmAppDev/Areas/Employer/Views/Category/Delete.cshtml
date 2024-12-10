@@ -1,0 +1,36 @@
+﻿@model Category
+
+<head>
+    <style>
+        p {
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<div class="header">
+    <h1>Delete a Category</h1>
+    <a asp-controller="Category" asp-action="Index" class="btn btn-outline-primary">Back to List</a>
+</div>
+
+<hr/>
+
+<form method="post" class="w-75">
+    <div class="border p-3 mt-4">
+        <div class="m-2 row">
+            <label asp-for="Name" class="col-lg-3 fw-bold"></label>
+            <input disabled asp-for="Name" class="col-lg-9 w-75">
+        </div>
+        <div class="m-2 py-3 row">
+            <label asp-for="DateCreate" class="col-lg-3 fw-bold">Date Create</label>
+            <input disabled asp-for="DateCreate" type="datetime" class="col-lg-9 w-75">
+        </div>
+        <button type="submit" class="btn btn-outline-danger" style="margin-left: 90%">Delete</button>
+    </div>
+</form>

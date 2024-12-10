@@ -1,0 +1,82 @@
+﻿@model List<Category>
+<partial name="_Notification" />
+
+<head>
+    <style>
+        p {
+            margin: 0 auto;
+        }
+
+        thead {
+            background-color: #3B40CC;
+            text-align: center;
+        }
+
+        tbody {
+            text-align: center;
+        }
+
+        tbody tr:nth-child(odd) { 
+            background-color: #f2f2f2;
+        }
+
+       thead tr th{
+            color: white
+        }
+        tbody tr td {
+            vertical-align: middle;
+        }
+
+        tbody tr .td-availability {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<h1>List of Categories waiting for approval</h1>
+
+<table class="table table-bordered">
+    @* <a asp-controller="Users" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Create New Account</a> *@
+    <thead>
+        <tr>
+            <th>Name Category</th>
+            <th>Date Create</th>
+            <th>Availability</th>
+            <th>User Create</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model.Where(c => !c.Availability))
+        // Phương thức Where sử dụng để lọc ra các obj Category trong Model có thuộc tính Availability là false
+        {
+            <tr>
+                <td style="font-weight: 600;">@category.Name</td>
+                <td>@category.DateCreate</td>
+                <td class="td-availability">
+                    @(category.Availability ? "Approve" : "Refuse")
+                    @if (category.Availability)
+                    {
+                        <form asp-controller="Category" asp-action="ToggleAvailability" method="post">
+                            <input type="hidden" name="id" value="@category.Id" />
+                            <button type="submit" class="btn btn-outline-warning">Refuse</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-controller="Category" asp-action="ToggleAvailability" method="post">
+                            <input type="hidden" name="id" value="@category.Id" />
+                            <button type="submit" class="btn btn-outline-primary">Approve</button>
+                        </form>
+                    }
+                </td>
+                <td style="font-weight: 700;">@category.ApplicationUser.Name</td>
+                <td>
+                    <a class="btn btn-outline-danger" asp-controller="Category" asp-action="Delete" asp-route-id=@category.Id>Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

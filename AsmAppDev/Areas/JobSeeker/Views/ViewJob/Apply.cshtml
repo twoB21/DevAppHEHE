@@ -1,0 +1,37 @@
+﻿@model JobVM
+
+<head>
+    <style>
+
+    </style>
+</head>
+
+<div class="d-flex justify-content-between align-items-center">
+    <h2>Apply to Job</h2>
+    <a asp-controller="ViewJob" asp-action="Index" class="btn btn-outline-primary">Back to List</a>
+</div>
+
+<hr/>
+
+<form class="w-75" method="post">
+    <input hidden asp-for="apply.JobId" />
+    <div class="border p-3 mt-4">
+        <div class="mb-3 row">
+            <label asp-for="Job.Title" class="col-lg-3"></label>
+            <input asp-for="Job.Title" class="col-lg-9 form-control w-50" disabled>
+        </div>
+        <div class="mb-3 row">
+            <label asp-for="Job.Description" class="col-lg-3"></label>
+            <input asp-for="Job.Description" class="col-lg-9 form-control w-50" disabled>
+        </div>
+        <div class="mb-3 row">
+            <label asp-for="Job.requiredQualification" class="col-lg-3">Required Qualification</label>
+            <input asp-for="Job.requiredQualification" class="col-lg-9 form-control w-50" disabled>
+        </div>
+        <div class="mb-3 row">
+            <label asp-for="Job.Deadline" class="col-lg-3"></label>
+            <input asp-for="Job.Deadline" class="col-lg-9 form-control w-50" disabled>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Apply</button>
+    </div>
+</form>

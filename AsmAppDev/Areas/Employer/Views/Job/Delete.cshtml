@@ -1,0 +1,59 @@
+﻿@model Job
+
+<head>
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .input-field {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .btn-delete-job {
+            margin-left: 90%;
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+    </style>
+</head>
+
+<div class="header">
+    <h1>Delete a job</h1>
+    <a asp-controller="Job" asp-action="Index" class="btn btn-outline-primary">Back to List</a>
+</div>
+
+<hr/>
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="mb-2 input-field">
+            <label asp-for="Title"></label>
+            <input disabled asp-for="Title" class="form-control w-75 px-2">
+        </div>
+        <div class="mb-2 input-field">
+            <label asp-for="Description"></label>
+            <textarea disabled asp-for="Description" class="form-control w-75 px-2" rows="4"></textarea>
+        </div>
+        <div class="mb-2 input-field">
+            <label asp-for="requiredQualification">Required Qualification</label>
+            <input disabled asp-for="requiredQualification" class="form-control w-75 px-2">
+        </div>
+        <div class="mb-2 input-field">
+            <label asp-for="Deadline"></label>
+            <input disabled asp-for="Deadline" class="form-control w-75 px-2">
+        </div>
+        <div class="mb-2 input-field">
+            <label asp-for="Category"></label>
+            <input disabled asp-for="Category.Name" class="form-control w-75 px-2">
+        </div>
+        <button type="submit" class="btn btn-outline-danger btn-delete-job">Delete</button>
+    </div>
+</form>

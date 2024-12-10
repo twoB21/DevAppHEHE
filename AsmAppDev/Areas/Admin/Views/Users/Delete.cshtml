@@ -1,0 +1,59 @@
+﻿@model ApplicationUser
+
+<head>
+    <style>
+        p {
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mb-3 {
+            display: flex;
+        }
+    </style>
+</head>
+
+<div class="header">
+    <h2>Delete Account</h2>
+    <a asp-controller="Users" asp-action="Index" class="h-100 btn btn-primary">Back to List</a>
+</div>
+
+<form method="post" asp-action="Delete">
+    <input asp-for="Id" hidden />
+    <hr />
+    <div class="mb-3">
+        <label asp-for="Name" style="line-height: 32px;">
+            <i class="bi bi-person-circle"></i>
+        </label>
+        <input style="width: 50%;" asp-for="Name" class="form-control mx-3" disabled />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email" style="line-height: 32px;">
+            <i class="bi bi-envelope-at"></i>
+        </label>
+        <input style="width: 50%;" asp-for="Email" class="form-control mx-3" disabled />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Address" style="line-height: 32px;">
+            <i class="bi bi-geo-alt"></i>
+        </label>
+        <input style="width: 50%;" asp-for="Address" class="form-control mx-3" disabled />
+    </div>
+    <div class="mb-3">
+        <label asp-for="City" style="line-height: 32px;">
+            <i class="bi bi-building"></i>
+        </label>
+        <input style="width: 50%;" asp-for="City" class="form-control mx-3" disabled />
+    </div>
+    <button type="submit" class="w-10 btn btn-lg btn-danger">Delete</button>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

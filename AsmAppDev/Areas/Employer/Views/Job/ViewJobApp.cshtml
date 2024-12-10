@@ -1,0 +1,125 @@
+﻿@model IEnumerable<AsmAppDev.Models.JobApplication>
+
+<head>
+    <style>
+        p {
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        thead {
+            background-color: #3B40CC;
+            text-align: center;
+        }
+
+            thead tr th {
+                color: white
+            }
+
+        tbody {
+            text-align: center;
+        }
+
+        tbody tr:nth-child(odd) { /* odd: số lẻ, even: số chẳn */
+            background-color: #f2f2f2;
+        }
+
+        tbody tr td {
+            vertical-align: middle;
+        }
+
+        #filterBy {
+            border: 1px solid #EEEEEE;
+            border-radius: 10px 0 0 10px;
+            padding: 5px 35px;
+            width: 33%;
+        }
+
+        .btn-apply {
+            border: 1px solid #EEEEEE;
+            background-color: #00CC66;
+            color: #FFFFFF;
+            border-radius: 0 25px 25px 0;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-apply:hover {
+            background-color: #FFFFFF;
+            border: 1px solid #00CC66;
+            color: #00CC66;
+        }
+
+        #sortBy {
+            padding: 5px;
+            width: 25%;
+        }
+
+    </style>
+</head>
+
+<div class="header">
+    <h2>List of Job Application</h2>
+    <a asp-controller="Job" asp-action="Index" class="btn btn-outline-primary">Back to List</a>
+</div>
+
+<hr/>
+
+<!-- Form cho việc sắp xếp và lọc -->
+<form asp-action="ViewJobApp" method="get">
+    <div class="d-flex">
+        <label for="filterBy" class="fw-bold"></label>
+        <input placeholder="filter by Email" type="text" id="filterBy" name="filterBy">
+        <button type="submit" class="btn-apply">Apply Filters</button>
+    </div>
+    <div class="my-4">
+        <label for="sortBy" class="fw-bold">Sort by:</label>
+        <select id="sortBy" name="sortBy">
+            <option value="email">Email (A-Z)</option>
+            <option value="emailDesc">Email (Z-A)</option>
+            <option value="dayApply">Day Apply (Oldest)</option>
+            <option value="dayApplyDesc">Day Apply (Newest)</option>
+        </select>
+    </div>
+</form>
+
+@* <script>
+    document.getElementById("sortBy").addEventListener("change", function () {
+        this.form.submit();
+    });
+</script> *@
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Day Apply</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var jobApplication in Model.Where(j => !j.Status))
+        {
+            <tr>
+                <td>@jobApplication.Email</td>
+                <td>@jobApplication.DayApply.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <a asp-action="ViewProfile" asp-route-id="@jobApplication.Id" class="btn btn-outline-primary">View Profile</a>
+                    <a asp-action="Accept" asp-route-id="@jobApplication.Id" class="btn btn-outline-success">Acccept</a>
+                    <a asp-action="Decline" asp-route-id="@jobApplication.Id" class="btn btn-outline-danger">Decline</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    document.getElementById("sortBy").addEventListener("change", function () {
+        this.form.submit();
+    });
+</script>

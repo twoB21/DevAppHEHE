@@ -1,0 +1,94 @@
+﻿@model List<Job>
+<partial name="_Notification" />
+
+<head>
+    <style>
+        p {
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-new-job {
+            position: relative;
+        }
+
+        .btn-new-job:hover::after {
+            content: "Add New Job";
+            position: absolute;
+            bottom: 0%;
+            left: 100%;
+            background-color: rgba(0, 0, 0, 0.15);
+            border: 1px solid #CCCCCC;
+            margin: 3px 10px;
+            padding: 5px 20px;
+            width: 142px;
+            border-radius: 5px;
+            z-index: 999;
+            color: #FFF;
+            font-size: 12px;
+        }
+
+        thead {
+            background-color: #3B40CC;
+            text-align: center;
+        }
+
+            thead tr td{
+                color: white
+            }
+        tbody {
+            text-align: center;
+        }
+
+        tbody tr:nth-child(odd) { /* odd: số lẻ, even: số chẳn */
+            background-color: #f2f2f2;
+        }
+
+        tbody tr td {
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+
+<div>
+    <h2>List of Job</h2>
+    <a asp-controller="Job" asp-action="Create" class="btn btn-primary btn-new-job"><i class="bi bi-person-workspace"></i></a>
+</div>
+
+<hr/>
+
+<table class="table table-bordered">
+	<thead>
+		<tr class="fw-bold">
+			<td>Title</td>
+			<td>Description</td>
+			<td>Required Qualification</td>
+			<td>Deadline</td>
+			<td>Category</td>
+			<td></td>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var Job in Model)
+		{
+			<tr>
+				<td>@Job.Title</td>
+				<td>@Job.Description</td>
+				<td>@Job.requiredQualification</td>
+				<td>@Job.Deadline</td>
+				<td class="fw-bold">@Job.Category.Name</td>
+				<td>
+					<a asp-controller="Job" asp-action="Edit" asp-route-id="@Job.Id" class="btn btn-outline-primary">Edit</a>
+					<a asp-controller="Job" asp-action="Delete" asp-route-id="@Job.Id" class="btn btn-outline-danger">Delete</a>
+					<a asp-controller="Job" asp-action="ViewJobApp" asp-route-id="@Job.Id" class="btn btn-outline-success">View Job Application</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

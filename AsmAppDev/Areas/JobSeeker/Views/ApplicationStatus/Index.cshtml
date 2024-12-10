@@ -1,0 +1,74 @@
+﻿@model List<JobApplication>
+<partial name="_Notification" />
+
+<head>
+	<style>
+        p {
+            margin: 0 auto;
+        }
+
+		thead {
+			background-color: #3B40CC;
+			text-align: center;
+		}
+
+			thead tr td {
+				color: white
+			}
+
+        tbody {
+            text-align: center;
+        }
+
+        tbody tr:nth-child(odd) { /* odd: số lẻ, even: số chẳn */
+            background-color: #f2f2f2;
+        }
+
+        tbody tr td {
+            vertical-align: middle;
+        }
+
+        tbody tr .td-status {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+	</style>
+</head>
+
+<div>
+	<h1>List of Job Applied</h1>
+	@* <a asp-controller="ApplicationStatus" asp-action="Index" class="btn btn-primary">Back</a> *@
+</div>
+
+<table class="table table-bordered">
+	<thead>
+		<tr class="fw-bold">
+			<td>Job Title</td>
+			<td>Job Description</td>
+			<td>Day Apply</td>
+			<td>Status</td>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var Object in Model)
+		{
+			<tr>
+				<td>@Object.Job.Title</td>
+				<td>@Object.Job.Description</td>
+				<td>@Object.DayApply</td>
+				<td>
+					@* @(Object.Status ? "Accepted" : "Pending") *@
+					@if (Object.Status == true)
+					{
+						<p class="text-success fw-bold">Accepted</p>
+					} else
+					{
+						<p class="text-warning fw-normal">Pending</p>
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

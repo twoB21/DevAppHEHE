@@ -1,0 +1,99 @@
+﻿﻿@using Microsoft.AspNetCore.Identity
+@model AsmAppDev.Models.ApplicationUser
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<head>
+    <style>
+        .vertical-line {
+            width: 2px; 
+            height: 200px; 
+            background-color: black; 
+        }
+
+        .img-thumbnail {
+            border-radius: 50%;
+        }
+
+        .btn-edit-profile {
+            position: relative;
+        }
+
+        .btn-edit-profile:hover::after {
+            content: "Edit Profile";
+            position: absolute;
+            bottom: 0%;
+            left: 100%;
+            background-color: rgba(0, 0, 0, 0.15);
+            border: 1px solid #CCCCCC;
+            margin: 3px 10px;
+            padding: 5px 20px;
+            width: 100px;
+            border-radius: 5px;
+            z-index: 999;
+            color: #FFF;
+            font-size: 12px;
+        }
+
+        .edit-profile {
+            text-align: center;
+        }
+        .avatar{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<div class="w-100 my-5">
+    <dl class="d-flex">
+        <div class="w-50">
+            <div class="" style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+">
+                @if (!string.IsNullOrEmpty(Model.Avatar))
+                {
+                    <img src="@Model.Avatar" alt="Avatar" class="avatar" style="max-width: 200px; max-height: 200px;" />
+                }
+                else
+                {
+                    <span>No avatar available</span>
+                }
+            </div>
+            <div class="edit-profile">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-secondary btn-edit-profile mt-3 w-25"><i class="bi bi-pencil-square"></i></a>
+            </div>
+        </div>
+        <div class="vertical-line mx-5"></div>
+        <div class="row">
+            <dt class="col-sm-4">Name: </dt>
+            <dd class="col-sm-8">@Model.Name</dd>
+
+            <dt class="col-sm-4">Introduction: </dt>
+            <dd class="col-sm-8">@Model.Introduction</dd>
+
+            <dt class="col-sm-4">Address: </dt>
+            <dd class="col-sm-8">@Model.Address</dd>
+
+            <dt class="col-sm-4">City: </dt>
+            <dd class="col-sm-8">@Model.City</dd>
+
+            <dd class="col-sm-6 text-center">
+                @if (!string.IsNullOrEmpty(Model.CV))
+                {
+                    <a class="btn btn-outline-danger" href="@Model.CV" target="_blank">View CV</a>
+                }
+                else
+                {
+                    <span>No CV uploaded</span>
+                }
+            </dd>
+        </div>
+    </dl>
+</div>

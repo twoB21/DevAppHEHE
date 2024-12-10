@@ -1,0 +1,87 @@
+﻿@model JobVM
+
+<head>
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .input-field {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .btn-add-job {
+            margin-left: 88%;
+        }
+
+        .d-grid {
+            margin-right: 5%;
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        input, select {
+            height: 150%;
+        }
+
+    </style>
+  
+</head>
+
+<div class="header">
+    <h2>Create a job</h2>
+    <a asp-controller="Job" asp-action="Index" class="btn btn-outline-primary">Back to List</a>
+</div>
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="mb-2 input-field">
+            <label asp-for="Job.Title"></label>
+            <div class="d-grid w-75">
+                <input asp-for="Job.Title" class="form-control px-2">
+                <span asp-validation-for="Job.Title" class="text-danger mt-4"></span>
+            </div>
+        </div>
+        <div class="mb-2 input-field">
+            <label asp-for="Job.Description"></label>
+            <div class="d-grid w-75">
+                <textarea asp-for="Job.Description" class="form-control px-2" rows="4"></textarea>
+                <span asp-validation-for="Job.Description" class="text-danger mt-2"></span>
+            </div>
+        </div>
+        <div class="mb-2 input-field">
+            <label asp-for="Job.requiredQualification">Required Qualification</label>
+            <div class="d-grid w-75">
+                <input asp-for="Job.requiredQualification" class="form-control px-2">
+                <span asp-validation-for="Job.requiredQualification" class="text-danger mt-4"></span>
+            </div>
+        </div>
+        <div class="mb-4 input-field">
+            <label asp-for="Job.Deadline"></label>
+            <div  class="d-grid w-75">
+                <input id="deadline" value="2024-12-07T15:30"  asp-for="Job.Deadline" class="form-control px-2">
+                <span asp-validation-for="Job.Deadline" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="mb-4 input-field">
+            <label asp-for="Job.Category"></label>
+            <div class="d-grid w-75">
+                <select asp-for="Job.CategoryId" asp-items="@Model.Categories" class="form-select px-2"></select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-primary btn-add-job">Create</button>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+

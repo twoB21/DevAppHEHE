@@ -1,0 +1,69 @@
+﻿@model List<Job>
+<partial name="_Notification" />
+
+<head>
+	<style>
+        p {
+            margin: 0 auto;
+        }
+
+		thead {
+			background-color: #3B40CC;
+			text-align: center;
+		}
+
+			thead tr td {
+				color: white
+			}
+
+        tbody {
+            text-align: center;
+        }
+
+        tbody tr:nth-child(odd) { /* odd: số lẻ, even: số chẳn */
+            background-color: #f2f2f2;
+        }
+
+        tbody tr td {
+            vertical-align: middle;
+        }
+
+        tbody tr .td-status {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+	</style>
+</head>
+
+<h1>List of Job</h1>
+<hr/>
+
+<table class="table table-bordered">
+	<thead>
+		<tr class="fw-bold">
+			<td style="width: 15%">Title</td>
+			<td style="width: 25%">Description</td>
+			<td style="width: 20%">Required Qualification</td>
+			<td>Deadline</td>
+			<td>Category</td>
+			<td></td>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var Job in Model)
+		{
+			<tr>
+				<td>@Job.Title</td>
+				<td>@Job.Description</td>
+				<td>@Job.requiredQualification</td>
+				<td>@Job.Deadline</td>
+				<td>@Job.Category.Name</td>
+				<td>
+					<a asp-controller="ViewJob" asp-action="Apply" asp-route-id="@Job.Id" class="btn btn-outline-primary">Apply</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

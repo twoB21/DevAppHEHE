@@ -1,0 +1,54 @@
+﻿@model Category
+
+<head>
+    <style>
+        p {
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mb-3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-control {
+            margin-right: 260px;
+        }
+    </style>
+</head>
+
+<div class="header">
+    <h2>Delete Category</h2>
+    <a asp-controller="Category" asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>
+<hr />
+
+<div class="col-8">
+    <form method="post" asp-action="Delete">
+        <input asp-for="Id" hidden />
+        <div class="mb-3">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" class="form-control w-50" disabled />
+        </div>
+        <div class="mb-3">
+            <label asp-for="DateCreate">Date Create</label>
+            <input asp-for="DateCreate" class="form-control w-50" disabled type="datetime" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="ApplicationUser.Name">User</label>
+            <input asp-for="ApplicationUser.Name" class="form-control w-50" disabled />
+        </div>
+        <button type="submit" class="w-10 btn btn-lg btn-outline-danger">Delete</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

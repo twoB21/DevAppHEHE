@@ -42,7 +42,7 @@
             text-align: center;
         }
 
-        .tbody tr:nth-child(odd) { /* odd: số lẻ, even: số chẳn */
+        .tbody tr:nth-child(odd) {
             background-color: #f2f2f2;
         }
 
@@ -112,6 +112,7 @@
             <th>Status</th>
             <th>Role</th>
             <th></th>
+            <th>Edit Role</th>
         </tr>
     </thead>
     <tbody class="tbody">
@@ -158,6 +159,12 @@
                     @* <button class="btn btn-danger delete-button" data-id="@user.Id">Delete</button> *@
                     <a class="delete_button" asp-controller="Users" asp-action="Delete" asp-route-id=@user.Id>Delete</a>
                 </td>
+                <td>
+                    <!-- Thêm nút Edit Role -->
+                    <a class="active_button" asp-controller="Users" asp-action="EditRole" asp-route-id="@user.Id">Edit Role</a>
+                </td>
+
+
             </tr>
         }
     </tbody>

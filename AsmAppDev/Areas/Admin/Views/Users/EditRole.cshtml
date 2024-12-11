@@ -1,0 +1,27 @@
+﻿@model EditRoleViewModel
+
+<h1>Edit Roles for @Model.UserName</h1>
+
+<form asp-action="EditRole" method="post">
+    <input type="hidden" asp-for="UserId" />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Selected</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model.Roles)
+            {
+                <tr>
+                    <td>@role.RoleName</td>
+                    <td>
+                        <input type="radio" name="Roles" value="@role.RoleName" @(role.IsSelected ? "checked" : "") />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-success">Save Changes</button>
+</form>
